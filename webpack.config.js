@@ -3,8 +3,6 @@ var path = require('path');
 var fs = require('fs');
 
 
-var APP_DIR = ;
-
 var nodeModules = {};
 fs.readdirSync('node_modules')
     .filter(function(x) {
@@ -36,30 +34,34 @@ module.exports = [
                     //,'jsx-loader'
                 ]
             },
-            //{ test: /\.css$/,  loader: path.join(__dirname, 'server', 'style-collector') + '!css-loader' },
-            { test:  /\.json$/, loader: 'json-loader' }
-            //{ test: /\.ejs$/, loader: 'ejs-loader?variable=data' }
+            {test: /\.css$/, loader: 'style-loader!css-loader'},
+            {test:  /\.json$/, loader: 'json-loader' },
+            {test: /(\.eot|\.woff2|\.woff|\.ttf|\.svg)/, loader: 'file-loader'},
         ]
     }
 },
 {
   name: 'client',
-  entry: path.resolve(__dirname, 'src/client/app') + '/index.jsx',
+  entry: path.resolve(__dirname, 'client/src') + '/index.js',
   output: {
-    path: BUILD_DIR,
+    path: path.join(__dirname, './server/public/js'),
     filename: 'bundle.js'
   },
-  module : {
-    loaders : [
-      {
-        test : /\.jsx?/,
-        include : APP_DIR,
-        loader : 'babel-loader'
-      }
-    ]
+  module: {
+      loaders: [
+          { test : /\.jsx?/,
+
+              loaders: [
+                  'babel-loader'
+                  //,'jsx-loader'
+              ]
+          },
+          {test: /\.css$/, loader: 'style-loader!css-loader'},
+          {test:  /\.json$/, loader: 'json-loader' },
+          {test: /(\.eot|\.woff2|\.woff|\.ttf|\.svg)/, loader: 'file-loader'},
+      ]
   }
 
 }
 
 ];
-

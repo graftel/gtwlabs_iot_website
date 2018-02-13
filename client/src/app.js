@@ -5,8 +5,8 @@ import AwesomeComponent from './components/AwesomeComponent.jsx';
 class App extends React.Component {
   render () {
     return (
-      <div>
-        <p> Hello React!</p>
+      <div className="constainer">
+        <p> Hello React!111</p>
         <AwesomeComponent />
       </div>
     );

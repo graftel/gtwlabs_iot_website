@@ -4,9 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "cd dist && node server",
-    "build": "webpack",
-    "lint": "functionhappy | snazzy"
+    "start": "npm-run-all --parallel watch:server watch:build",
+    "watch:build": "webpack --watch",
+    "watch:server": "nodemon \"./server/bin/server.js\" --watch \"./server\""
   },
   "repository": {
     "type": "git",
@@ -30,10 +30,14 @@
     "babel-loader": "^7.1.2",
     "babel-preset-env": "^1.6.1",
     "babel-preset-react": "^6.24.1",
+    "css-loader": "^0.28.9",
+    "file-loader": "^1.1.6",
     "nodemon": "^1.14.12",
+    "npm-run-all": "^4.1.2",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-router": "^4.2.0",
+    "style-loader": "^0.20.1",
     "webpack": "^3.11.0"
   }
 }
