@@ -1,4 +1,5 @@
 import React from 'react';
+import { Redirect } from 'react-router-dom';
 
 class HomePage extends React.Component {
   constructor(props) {
@@ -13,12 +14,19 @@ class HomePage extends React.Component {
   }
 
   render() {
-    return (
-      <div>
-        Likes : <span>{this.state.likesCount}</span>
-        <div><button onClick={this.onLike}>Like Me</button></div>
-      </div>
-    );
+    if (1)
+    {
+      return (<Redirect to='/login' />);
+    }
+    else{
+      return (
+        <div>
+          Likes : <span>{this.state.likesCount}</span>
+          <div><button onClick={this.onLike}>Like Me</button></div>
+        </div>
+      );
+    }
+
   }
 }
 

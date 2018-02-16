@@ -42,7 +42,7 @@ module.exports = [
 },
 {
   name: 'client',
-  entry: path.resolve(__dirname, 'client/src') + '/index.js',
+  entry: path.resolve(__dirname, 'client/src') + '/app.js',
   output: {
     path: path.join(__dirname, './server/public/js'),
     filename: 'bundle.js'

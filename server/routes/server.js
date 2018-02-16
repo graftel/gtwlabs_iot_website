@@ -1,7 +1,6 @@
 import express from 'express';
 import React from 'react';
 import { renderToString } from 'react-dom/server';
-import App from '../../client/src/app';
 
 const server = express();
 
@@ -16,10 +15,10 @@ server.use(express.static(public_path));
 // use res.render to load up an ejs view file
 
 // index page
-server.get('/', (req, res) => {
-  const html = renderToString(<App />);
-
-  res.render('index',{body: html});
+server.get('/*', (req, res) => {
+//  const html = renderToString(<App />);
+  // To Do: Server side render
+  res.render('index',{});
 });
 
 server.listen(3000, () => {

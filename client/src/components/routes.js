@@ -1,12 +1,48 @@
-import React from 'react'
-import { Route, IndexRoute } from 'react-router'
-import HomePage from '../HomePage/HomePage'
-import LoginMain from '../UserManagement/loginMain'
+import AppRoot from '../Root/app-root'
+import Home from '../HomePage/HomePage'
+import LoginMain from '../UserManagement/LoginMain'
+import NotFound from '../ErrorPage/notfound'
 
+// const routes = [
+//   { component: AppRoot,
+//     routes: [
+//       { path: '/',
+//         exact: true,
+//         component: Home
+//       },
+//       { path: '/home',
+//         component: Home
+//       },
+//       { path: '/login',
+//         component: LoginMain
+//       },
+//       {
+//         path: '*',
+//         component: NotFound
+//       }
+//     ]
+//   }
+// ];
 
-module.exports = (
-  <div>
-    <Route path="/" component={HomePage}/>
-    <Route path="/login" component={LoginMain}/>
-  </div>
-)
+const routes = [
+  { component: AppRoot,
+    routes: [
+      { path: '/',
+        exact: true,
+        component: Home
+      },
+      { path: '/home',
+        component: Home
+      },
+      { path: '/login',
+        component: LoginMain
+      },
+      {
+        path: '*',
+        component: NotFound
+      }
+    ]
+  }
+];
+
+export default routes;
