@@ -34,9 +34,13 @@ module.exports = [
                     //,'jsx-loader'
                 ]
             },
-            {test: /\.css$/, loader: 'style-loader!css-loader'},
+            {test: /\.css$/, use: [
+                'style-loader',
+                'css-loader'
+                ]
+              },
             {test:  /\.json$/, loader: 'json-loader' },
-            {test: /(\.eot|\.woff2|\.woff|\.ttf|\.svg)/, loader: 'file-loader'},
+            {test: /(\.eot|\.woff2|\.jpg|\.ttf|\.svg)/, loader: 'file-loader'},
         ]
     }
 },
@@ -56,9 +60,16 @@ module.exports = [
                   //,'jsx-loader'
               ]
           },
-          {test: /\.css$/, loader: 'style-loader!css-loader'},
+          {test: /\.css$/, use: [
+            'style-loader',
+            'css-loader'
+            ]
+          },
           {test:  /\.json$/, loader: 'json-loader' },
-          {test: /(\.eot|\.woff2|\.woff|\.ttf|\.svg)/, loader: 'file-loader'},
+          {
+            test: /\.(png|jpg)$/,
+            loader: 'url-loader'
+          },
       ]
   }
 

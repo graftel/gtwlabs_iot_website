@@ -1,10 +1,32 @@
 import React from 'react';
+import { CSSTransitionGroup } from 'react-transition-group' // ES6
+import { LoginForm } from './parts/loginform'
+import RegForm from './parts/regform'
+import './login.css'
+import { alertActions } from '../_actions/alertAction'
 
 class LoginMain extends React.Component {
-  
+  constructor(props) {
+    super(props);
+    this.state = {showLogin: true};
+    this.handleClick = this.handleClick.bind(this);
+  }
+
+  handleClick(b) {
+    this.props.store.dispatch(alertActions.clear());
+    this.setState({showLogin: b});
+  } 
   
   
   render() {
+    let active_form = null;
+    if (this.state.showLogin){
+      active_form = <LoginForm {...this.props}/>;
+    }
+    else{
+      active_form = <RegForm {...this.props}/>
+    }
+    
     return (
       <div className="container text-center">
         <div className="panel panel-login">
@@ -13,49 +35,25 @@ class LoginMain extends React.Component {
           </div>
           <div className="panel-heading">
             <div className="row">
-              <div className="col">
-                <a href="/login" className="active" id="login-form-link">Login</a>
+              <div className="col" onClick={() => this.handleClick(true)}>
+                <a href="#" className={this.state.showLogin ? 'Active' : ''} id="login-form-link">Login</a>
               </div>
-              <div className="col">
-                <a href="#" id="register-form-link">Register</a>
+              <div className="col" onClick={() => this.handleClick(false)}>
+                <a href="#" className={this.state.showLogin ? '' : 'Active'} id="register-form-link" >Register</a>
               </div>
             </div>
           </div>
           <hr />
           <div className="panel-body">
-            <form id="login-form" action="/login" method="post" role="form">
-                <div className="form-group">
-                    <input type="text" name="email" id="email" tabIndex="1" className="form-control" placeholder="Email Address" />
+            <CSSTransitionGroup
+              transitionName="form-trans"
+              transitionEnterTimeout={500}
+              transitionLeaveTimeout={300}>
+                {active_form}
+                <div className="container" id="alert">
                 </div>
-                <div className="form-group">
-                  <input type="password" name="password" id="password"
-                    tabIndex="2" className="form-control" placeholder="Password" />
-                </div>
-                <div className="form-group">
-                  <button className="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-                </div>
-            </form>
-            <form id="register-form" action="/register" method="post" role="form">
-              <div className="form-group">
-                <input type="email" name="email" id="emailreg" tabIndex="1"
-                  className="form-control" placeholder="Email Address" value="" />
-              </div>
-              <div className="form-group">
-                <input type="password" name="password" id="passwordreg"
-                  tabIndex="2" className="form-control" placeholder="Password" />
-              </div>
-              <div className="form-group">
-                <input type="password" name="confirm-password"
-                  id="confirm-password" tabIndex="3" className="form-control"
-                  placeholder="Confirm Password" />
-              </div>
-              <div className="form-group">
-                <button className="btn btn-lg btn-primary btn-block" type="submit">Register</button>
-              </div>
-            </form>
-            <div className="container" id="alert">
-            </div>
-            <a href="/forgotpassword"> Forgot password? </a>
+                <a href="/forgotpassword"> Forgot password? </a>
+            </CSSTransitionGroup>
           </div>
         </div>
       </div>

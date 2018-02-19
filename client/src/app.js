@@ -3,11 +3,11 @@ import {render} from 'react-dom'
 import { Provider } from 'react-redux'
 import { renderRoutes } from 'react-router-config'
 import { BrowserRouter, Switch, Route } from 'react-router-dom'
-import { store } from './components/reduxStore.js'
+import { store } from './_store/reduxStore.js'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'jquery'
 import 'bootstrap'
-import routes from './components/routes'
+import routes from './_routes/routes'
 
 import Home from './HomePage/HomePage'
 import LoginMain from './UserManagement/LoginMain'
@@ -20,7 +20,7 @@ import NotFound from './ErrorPage/notfound'
 render((
     <Provider store={store}>
         <BrowserRouter>
-            {renderRoutes(routes)}
+            {renderRoutes(routes, {store:store})}
         </BrowserRouter>
     </Provider>
 ), document.getElementById('reactbody'));

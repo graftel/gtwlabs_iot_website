@@ -7,7 +7,7 @@ class AppRoot extends Component {
     render() {
       return (
         <div>
-            {renderRoutes(this.props.route.routes)}
+            {renderRoutes(this.props.route.routes, {...this.props})}
         </div>
       );
     }
