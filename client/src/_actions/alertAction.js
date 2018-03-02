@@ -3,7 +3,8 @@ import { gConstants } from '../_components/constants';
 export const alertActions = {
     success,
     error,
-    clear
+    clear,
+    info
 };
 
 function success(message) {
@@ -16,4 +17,8 @@ function error(message) {
 
 function clear() {
     return { type: gConstants.CLEAR };
+}
+
+function info(message) {
+    return { type: gConstants.INFO, message };
 }

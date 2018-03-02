@@ -1,6 +1,6 @@
 import { gConstants } from '../_components/constants';
 
-export function alert(state = {}, action) {
+export function home(state = {}, action) {
   switch (action.type) {
     case gConstants.SUCCESS:
       return {

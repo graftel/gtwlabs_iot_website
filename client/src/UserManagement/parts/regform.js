@@ -1,4 +1,7 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { userActions } from '../../_actions/userAction';
+import { alertActions } from '../../_actions/alertAction';
 
 class RegForm extends React.Component {
     constructor(props) {
@@ -6,7 +9,7 @@ class RegForm extends React.Component {
         this.state = {
             email: '',
             password: '',
-            conform_password: '',
+            confirm_password: '',
             submitted: false};
     
         this.handleChange = this.handleChange.bind(this);
@@ -16,18 +19,36 @@ class RegForm extends React.Component {
     handleChange(event) {
         const { name, value } = event.target;
         this.setState( { [name]: value} );
-
-        console.log(this.state);
     }
 
     handleSubmit(event) {
         event.preventDefault();
-        const { email, password, conform_password } = this.state;
-        console.log('email=' + email + 'password=' + password + 'confirm=' + conform_password);
+        
+        // this.setState({ submitted: true });
+        // const { user } = this.state;
+        const { dispatch } = this.props.store;
+
+        // if (user.firstName && user.lastName && user.username && user.password) {
+        //     dispatch(userActions.register(user));
+        // }
+        const { email, password, confirm_password } = this.state;
+        if (email){
+            if (password === confirm_password)
+            {
+                dispatch(userActions.register(email, password));
+            }
+            else{
+                dispatch(alertActions.error('Password not match'));
+            }
+        }
+        else{
+            dispatch(alertActions.error('Please Enter Email Address'));
+        }    
     }    
 
     render() {
-        const { email, password, conform_password, submitted } = this.state;
+        const { email, password, confirm_password, submitted } = this.state;
+        const { user, message } = this.props;
         return (
             <form id="register-form" onSubmit={this.handleSubmit} role="form">
                 <div className="form-group">
@@ -39,17 +60,32 @@ class RegForm extends React.Component {
                         tabIndex="2" className="form-control" placeholder="Password" value={password} onChange={this.handleChange} />
                 </div>
                 <div className="form-group">
-                    <input type="password" name="conform_password"
+                    <input type="password" name="confirm_password"
                         id="confirm-password" tabIndex="3" className="form-control"
-                        placeholder="Confirm Password" value={conform_password} onChange={this.handleChange}/>
+                        placeholder="Confirm Password" value={confirm_password} onChange={this.handleChange}/>
                 </div>
                 <div className="form-group">
                     <button className="btn btn-lg btn-primary btn-block" type="submit">Register</button>
                 </div>
+                {message && 
+                    <div className="container" id="alert">
+                            <div className="alert alert-danger">{message}</div>
+                    </div>
+                }
             </form>
         );
     }
 
 }
 
-export default RegForm;
+const mapStateToProps = (state) => { 
+    const { user } = state.reg;
+    const { message } = state.alert;
+    return {
+        user,
+        message
+    };
+}
+
+const connectedRegPage = connect(mapStateToProps)(RegForm);
+export { connectedRegPage as RegForm };

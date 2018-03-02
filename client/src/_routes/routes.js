@@ -1,7 +1,8 @@
-import AppRoot from '../Root/app-root'
-import Home from '../HomePage/HomePage'
-import LoginMain from '../UserManagement/LoginMain'
+import { RootLayout } from '../Root/RootLayout'
+import { HomePage } from '../HomePage/HomePage'
+import { LoginMain } from '../UserManagement/LoginMain'
 import NotFound from '../ErrorPage/notfound'
+import { AssetPage } from '../AssetPage/AssetPage'
 
 // const routes = [
 //   { component: AppRoot,
@@ -25,17 +26,30 @@ import NotFound from '../ErrorPage/notfound'
 // ];
 
 const routes = [
-  { component: AppRoot,
+  { path: '/login',
+    component: LoginMain
+  },
+  {
+    path: '/activate*',
+    component: LoginMain
+  },
+  {
+    path: '/forgotpassword',
+    component: LoginMain
+  },
+  {
+    path: '/reset-password*',
+    component: LoginMain
+  },
+  { component: RootLayout,
     routes: [
       { path: '/',
         exact: true,
-        component: Home
+        component: HomePage
       },
-      { path: '/home',
-        component: Home
-      },
-      { path: '/login',
-        component: LoginMain
+      {
+        path: '/asset/:assetID',
+        component: AssetPage
       },
       {
         path: '*',

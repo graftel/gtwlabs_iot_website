@@ -1,34 +1,107 @@
-import React from 'react';
-import { Redirect } from 'react-router-dom';
+import React from 'react'
+import { connect } from 'react-redux'
+import { Redirect } from 'react-router-dom'
+import SideNav from '../_components/sideNav'
+import HeaderNav from '../_components/headerNav'
+import MainArea from './parts/mainArea'
+import AddNewAssets from './parts/addNewAssets'
+import { dataActions } from '../_actions/dataAction'
+import Loader from '../_components/loader'
 
 class HomePage extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {likesCount : 0};
-    this.onLike = this.onLike.bind(this);
+
+   /* this.state = {
+                    assets: [
+                      {
+                        DisplayName: 'Asset 1',
+                        LatestTimeStamp: 123,
+                        DeviceCount: 30,
+                        AssetID: '123'
+                      },
+                      {
+                        DisplayName: 'Asset 2',
+                        LatestTimeStamp: 123,
+                        DeviceCount: 40,
+                        AssetID: '789'
+                      },
+                      {
+                        DisplayName: 'Asset 3',
+                        LatestTimeStamp: 333,
+                        DeviceCount: 20,
+                        AssetID: '31'
+                      }
+                        ]
+                  }*/
+    // first Get user's assets info with interval 10s
+    this.user = JSON.parse(localStorage.getItem('user'));
+    this.assets_local = JSON.parse(localStorage.getItem('assets'));
+    if (!this.assets_local)
+    {
+      this.props.dispatch(dataActions.getAssetsOverview(this.user));
+    }
   }
 
-  onLike () {
-    let newLikesCount = this.state.likesCount + 1;
-    this.setState({likesCount: newLikesCount});
+  componentDidMount() {
+   this.startTimer(); 
   }
+
+  componentWillUnmount () {
+    clearInterval(this.timer)
+  }
+
+  startTimer () {
+    clearInterval(this.timer);
+    this.timer = setInterval(this.tick.bind(this), 5000);
+  }
+
+  stopTimer () {
+    clearInterval(this.timer)
+  }
+
+  tick () {
+    //this.props.dispatch();
+  }
+
+  
 
   render() {
-    if (1)
+    //const { assets } = this.state;
+    const { assets, msg } = this.props;
+
+    let assets_display = null;
+    if (this.assets_local)
+    {
+      assets_display = this.assets_local;
+    }
+    else{
+      assets_display = assets;
+    }
+
+    if (!this.user)
     {
       return (<Redirect to='/login' />);
     }
     else{
       return (
-        <div>
-          Likes : <span>{this.state.likesCount}</span>
-          <div><button onClick={this.onLike}>Like Me</button></div>
-        </div>
+          <div>
+            <MainArea assets={assets_display} />
+            <AddNewAssets user={this.user} dispatch={this.props.dispatch} /> 
+          </div>
       );
     }
 
   }
 }
 
+function mapStateToProps(state) {
+  const { data, msg } = state.data
+  return {
+      assets : data,
+      msg: msg
+  };
+}
 
-export default HomePage;
+const connectedPage = connect(mapStateToProps)(HomePage);
+export { connectedPage as HomePage };
