@@ -37,7 +37,8 @@ class HomePage extends React.Component {
     // first Get user's assets info with interval 10s
     this.user = JSON.parse(localStorage.getItem('user'));
     this.assets_local = JSON.parse(localStorage.getItem('assets'));
-    if (!this.assets_local)
+
+    if (this.user && !this.assets_local)
     {
       this.props.dispatch(dataActions.getAssetsOverview(this.user));
     }

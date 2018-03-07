@@ -3,7 +3,7 @@ import Link from 'react-router-dom/Link';
 import Route from 'react-router-dom/Route';
 import { renderRoutes } from 'react-router-config';
 import { connect } from 'react-redux'
-
+import { Redirect } from 'react-router-dom'
 import SideNav from '../_components/sideNav'
 import HeaderNav from '../_components/headerNav'
 import { dataActions } from '../_actions/dataAction'
@@ -16,7 +16,7 @@ class RootLayout extends Component {
 
     this.user = JSON.parse(localStorage.getItem('user'));
     this.assets_local = JSON.parse(localStorage.getItem('assets'));
-    if (!this.assets_local)
+    if (this.user && !this.assets_local)
     {
       this.props.dispatch(dataActions.getAssetsOverview(this.user));
     }
@@ -35,25 +35,31 @@ class RootLayout extends Component {
         assets_display = assets;
       }
 
-      return (
-        <div id="home-page-main">
-        <HeaderNav />
-        <div className ="container-fluid">
-          {assets_display ?
-          <div className ="row">
-            <SideNav assets={assets_display}/>
-            <main role="main" className ="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
-                  {renderRoutes(this.props.route.routes, {store : this.props.store})}
-                  {/*<MainArea assets={assets_display} />
-                  <AddNewAssets user={this.user} dispatch={this.props.dispatch} />*/} 
-            </main>
+      if (!this.user)
+      {
+        return (<Redirect to='/login' />);
+      }
+      else{
+        return (
+          <div id="home-page-main">
+          <HeaderNav />
+          <div className ="container-fluid">
+            {assets_display ?
+            <div className ="row">
+              <SideNav assets={assets_display}/>
+              <main role="main" className ="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+                    {renderRoutes(this.props.route.routes, {store : this.props.store})}
+                    {/*<MainArea assets={assets_display} />
+                    <AddNewAssets user={this.user} dispatch={this.props.dispatch} />*/} 
+              </main>
+            </div>
+            : <Loader />
+            }
           </div>
-          : <Loader />
-          }
         </div>
-      </div>
 
-      );
+        );
+      }
     }
   }
   function mapStateToProps(state) {

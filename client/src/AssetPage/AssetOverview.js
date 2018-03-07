@@ -6,6 +6,8 @@ import './asset.css'
 import Loader from '../_components/loader'
 import SideNav from '../_components/sideNav'
 import HeaderNav from '../_components/headerNav'
+import { Samy, SvgProxy } from 'react-samy-svg'
+import svgcontents from 'raw-loader!./svg/HeatExchanger.svg'
 
 class AssetOverview extends React.Component {
   constructor(props) {
@@ -15,7 +17,9 @@ class AssetOverview extends React.Component {
 
     this.state = {
         AssetID : props.match.params.assetID,
-        CurrentAsset : this.assets.Items.filter(item => item.AssetID === props.match.params.assetID)[0]
+        CurrentAsset : this.assets.Items.filter(item => item.AssetID === props.match.params.assetID)[0],
+        ShellInlet: '94.4 F',
+        ShellOutlet: '95.5 F'
     }
   }
 
@@ -23,13 +27,9 @@ class AssetOverview extends React.Component {
     ReactDOM.findDOMNode(this).innerHTML = this.props.html;
   }
 
-  createMarkup() {
-    return {__html: '123123123'};
-  }
-
   render() {
     //const { assets } = this.state;
-    const { AssetID } = this.state;
+    const { AssetID, ShellInlet, ShellOutlet } = this.state;
     if (!this.user)
     {
       return (<Redirect to='/login' />);
@@ -37,7 +37,10 @@ class AssetOverview extends React.Component {
     else{
       return (
         <div className="mt-5" >
-          <p>Overview</p>
+          <p>Overview123</p>
+          <Samy svgXML={svgcontents} >
+            <SvgProxy selector="#Star" fill="red"/>
+          </Samy>
         </div>
       );
     }

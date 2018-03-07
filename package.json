@@ -29,6 +29,7 @@
     "raw-loader": "^0.5.1",
     "react-redux": "^5.0.6",
     "react-router-config": "^1.0.0-beta.4",
+    "react-samy-svg": "^3.0.6",
     "react-transition-group": "^1.2.1",
     "redux": "^3.7.2",
     "redux-logger": "^3.0.6",

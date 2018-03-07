@@ -32,7 +32,7 @@ class AssetDashboard extends React.Component {
     else{
       return (
         <div>
-           <p>Dashboard</p>
+           <p></p>
          </div>
       );
     }

@@ -19,7 +19,7 @@ class MainArea extends React.Component {
         return (
             <div id="MainArea">
                 <div className="table-responsive">
-                    <table className="table">
+                    <table className="table table-striped">
                         <thead>
                             <tr>
                                 <th>Asset</th>
