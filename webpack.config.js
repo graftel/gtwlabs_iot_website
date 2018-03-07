@@ -76,3 +76,11 @@ module.exports = [
 }
 
 ];
+
+
+/*
+{
+    test: /\.svg$/,
+    loader: 'babel-loader!svg-react-loader'
+},
+*/

@@ -49,6 +49,8 @@ Temporary Items
 # Project specific
 node_modules
 
+.vscode
+
 **/bin
 **/public
 **/config

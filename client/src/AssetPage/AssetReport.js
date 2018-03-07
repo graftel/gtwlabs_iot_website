@@ -7,16 +7,19 @@ import Loader from '../_components/loader'
 import SideNav from '../_components/sideNav'
 import HeaderNav from '../_components/headerNav'
 
-class AssetPage extends React.Component {
+class AssetReport extends React.Component {
   constructor(props) {
     super(props);
-
+    console.log("test");
     this.state = {
         AssetID : props.match.params.assetID
     }
 
     this.user = JSON.parse(localStorage.getItem('user'));
     this.assets = JSON.parse(localStorage.getItem('assets'));
+    // data will update every 1 minute on this page
+    
+
   }
 
   render() {
@@ -29,8 +32,8 @@ class AssetPage extends React.Component {
     else{
       return (
         <div>
-          <p>{AssetID}</p>
-        </div>
+           <p>Report</p>
+         </div>
       );
     }
 
@@ -45,5 +48,5 @@ function mapStateToProps(state) {
   };
 }
 
-const connectedPage = connect(mapStateToProps)(AssetPage);
-export { connectedPage as AssetPage };
+const connectedPage = connect(mapStateToProps)(AssetReport);
+export { connectedPage as AssetReport };

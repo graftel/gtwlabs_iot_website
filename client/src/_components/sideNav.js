@@ -3,7 +3,7 @@ import React from 'react';
 const AssetSubMenu = (props) => {
     return (
         <li className="nav-item">
-            <a className="nav-link" href={"/asset/" + props.singleAsset.AssetID} >
+            <a className="nav-link" href={"/asset/" + props.singleAsset.AssetID + "/overview"}  >
                 <i className="fas fa-align-justify mr-2"></i>{props.singleAsset.DisplayName}
             </a>
         </li>

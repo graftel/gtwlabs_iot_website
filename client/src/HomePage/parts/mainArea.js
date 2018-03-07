@@ -3,7 +3,7 @@ import React from 'react';
 const MainTableRow = (props) => {
     return(
         <tr>
-            <td><a href={"/asset/" + props.singleAsset.AssetID}>{props.singleAsset.DisplayName}</a></td>
+            <td><a href={"/asset/" + props.singleAsset.AssetID + "/overview"}>{props.singleAsset.DisplayName}</a></td>
             <td>{props.singleAsset.LatestTimeStamp}</td>
             <td>{props.singleAsset.DeviceCount}</td>
         </tr>

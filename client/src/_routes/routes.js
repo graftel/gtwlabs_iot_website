@@ -2,7 +2,13 @@ import { RootLayout } from '../Root/RootLayout'
 import { HomePage } from '../HomePage/HomePage'
 import { LoginMain } from '../UserManagement/LoginMain'
 import NotFound from '../ErrorPage/notfound'
-import { AssetPage } from '../AssetPage/AssetPage'
+import { AssetMain } from '../AssetPage/AssetMain'
+import { AssetOverview } from '../AssetPage/AssetOverview'
+import { AssetDashboard } from '../AssetPage/AssetDashboard'
+import { AssetCalculation } from '../AssetPage/AssetCalculation'
+import { AssetDevice } from '../AssetPage/AssetDevice'
+import { AssetReport } from '../AssetPage/AssetReport'
+import { AssetAlert } from '../AssetPage/AssetAlert'
 
 // const routes = [
 //   { component: AppRoot,
@@ -49,7 +55,33 @@ const routes = [
       },
       {
         path: '/asset/:assetID',
-        component: AssetPage
+        component: AssetMain,
+        routes: [
+          {
+            path: '/asset/:assetID/overview',
+            component: AssetOverview
+          },
+          {
+            path: '/asset/:assetID/dashboard',
+            component: AssetDashboard
+          },
+          {
+            path: '/asset/:assetID/calculation',
+            component: AssetCalculation
+          },
+          {
+            path: '/asset/:assetID/device',
+            component: AssetDevice
+          },
+          {
+            path: '/asset/:assetID/report',
+            component: AssetReport
+          },
+          {
+            path: '/asset/:assetID/alert',
+            component: AssetAlert
+          }
+        ]
       },
       {
         path: '*',
