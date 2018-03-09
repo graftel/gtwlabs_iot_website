@@ -8,6 +8,7 @@ import SideNav from '../_components/sideNav'
 import HeaderNav from '../_components/headerNav'
 import { Samy, SvgProxy } from 'react-samy-svg'
 import svgcontents from 'raw-loader!./svg/HeatExchanger.svg'
+import { SettingModal } from './overview_parts/SettingModal'
 
 class AssetOverview extends React.Component {
   constructor(props) {
@@ -18,18 +19,32 @@ class AssetOverview extends React.Component {
     this.state = {
         AssetID : props.match.params.assetID,
         CurrentAsset : this.assets.Items.filter(item => item.AssetID === props.match.params.assetID)[0],
-        ShellInlet: '94.4 F',
-        ShellOutlet: '95.5 F'
+        Settings: {
+          ShellInlet: "23.5",
+          ShellOutlet: "12.5",
+          TubeInlet: "12.5",
+          TubeOutlet: "33.5"
+        },
+        dataid: ""
     }
+
+    this.HandleText = this.HandleText.bind(this);
+    this.HandleModalClick = this.HandleModalClick.bind(this);
   }
 
-  OnClickParameter(){
-    ReactDOM.findDOMNode(this).innerHTML = this.props.html;
+  HandleModalClick(e) {
+    // get setting
+    this.setState({dataid: e.target.id});
+  }
+
+  HandleText(elem){
+    const { Settings } = this.state;
+    elem.innerHTML = Settings[elem.id];
   }
 
   render() {
     //const { assets } = this.state;
-    const { AssetID, ShellInlet, ShellOutlet } = this.state;
+    const { AssetID, Settings, dataid } = this.state;
     if (!this.user)
     {
       return (<Redirect to='/login' />);
@@ -37,10 +52,12 @@ class AssetOverview extends React.Component {
     else{
       return (
         <div className="mt-5" >
-          <p>Overview123</p>
           <Samy svgXML={svgcontents} >
-            <SvgProxy selector="#Star" fill="red"/>
+            {Object.keys(this.state.Settings).map((item,i) => 
+              <SvgProxy selector={"#" + item} key={i} onElementSelected={(elem) => this.HandleText(elem)} onClick={(e) => this.HandleModalClick(e)}/>
+            )}
           </Samy>
+          <SettingModal dataid={dataid} />
         </div>
       );
     }
