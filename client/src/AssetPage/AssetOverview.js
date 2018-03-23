@@ -1,14 +1,14 @@
-import React from 'react'
-import { connect } from 'react-redux'
-import { Redirect } from 'react-router-dom'
-import { dataActions } from '../_actions/dataAction'
-import './asset.css'
-import Loader from '../_components/loader'
-import SideNav from '../_components/sideNav'
-import HeaderNav from '../_components/headerNav'
-import { Samy, SvgProxy } from 'react-samy-svg'
-import svgcontents from 'raw-loader!./svg/HeatExchanger.svg'
-import { SettingModal } from './overview_parts/SettingModal'
+import React from 'react';
+import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
+import { dataActions } from '../_actions/dataAction';
+import './asset.css';
+import Loader from '../_components/loader';
+import SideNav from '../_components/sideNav';
+import HeaderNav from '../_components/headerNav';
+import { Samy, SvgProxy } from 'react-samy-svg';
+import svgcontents from 'raw-loader!./svg/HeatExchanger.svg';
+import { SettingModal } from './overview_parts/SettingModal';
 
 class AssetOverview extends React.Component {
   constructor(props) {

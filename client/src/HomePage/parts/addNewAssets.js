@@ -1,5 +1,5 @@
 import React from 'react'
-import { dataActions } from '../../_actions/dataAction'
+import { assetActions } from '../../_actions/assetAction'
 import $ from 'jquery'
 
 class AddNewAssets extends React.Component {
@@ -18,7 +18,7 @@ class AddNewAssets extends React.Component {
 
     handleSubmit(e) {
         e.preventDefault();
-        this.props.dispatch(dataActions.addAsset(this.props.user,this.state.displayname));
+        this.props.dispatch(assetActions.addAsset(this.props.user,this.state.displayname));
         $(this.modal).modal('hide');
 
     }

@@ -7,6 +7,10 @@ import { store } from './_store/reduxStore.js'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'jquery'
 import 'bootstrap'
+import 'toastr/build/toastr.min.css';
+import 'react-grid-layout/css/styles.css'
+import 'react-resizable/css/styles.css'
+
 import routes from './_routes/routes'
 
 import Home from './HomePage/HomePage'

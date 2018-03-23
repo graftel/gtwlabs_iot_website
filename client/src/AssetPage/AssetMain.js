@@ -37,7 +37,6 @@ class AssetMain extends React.Component {
           <ul className="nav nav-pills">
             <li className="nav-item"><NavLink className="nav-link" to={"/asset/" + AssetID + "/overview"} activeClassName="active" >Overview</NavLink></li>
             <li className="nav-item"><NavLink className="nav-link" to={"/asset/" + AssetID + "/dashboard"} activeClassName="active" >Dashboard</NavLink></li>
-            <li className="nav-item"><NavLink className="nav-link" to={"/asset/" + AssetID + "/calculation"} activeClassName="active" >Calculation</NavLink></li>
             <li className="nav-item"><NavLink className="nav-link" to={"/asset/" + AssetID + "/device"} activeClassName="active" >Devices</NavLink></li>
             <li className="nav-item"><NavLink className="nav-link" to={"/asset/" + AssetID + "/report"} activeClassName="active" >Reports</NavLink></li>
             <li className="nav-item"><NavLink className="nav-link" to={"/asset/" + AssetID + "/alert"} activeClassName="active" >Alerts</NavLink></li>

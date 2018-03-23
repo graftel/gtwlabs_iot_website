@@ -5,8 +5,8 @@ import NotFound from '../ErrorPage/notfound'
 import { AssetMain } from '../AssetPage/AssetMain'
 import { AssetOverview } from '../AssetPage/AssetOverview'
 import { AssetDashboard } from '../AssetPage/AssetDashboard'
-import { AssetCalculation } from '../AssetPage/AssetCalculation'
 import { AssetDevice } from '../AssetPage/AssetDevice'
+import { AssetDeviceDetail } from '../AssetPage/AssetDeviceDetail'
 import { AssetReport } from '../AssetPage/AssetReport'
 import { AssetAlert } from '../AssetPage/AssetAlert'
 
@@ -66,12 +66,12 @@ const routes = [
             component: AssetDashboard
           },
           {
-            path: '/asset/:assetID/calculation',
-            component: AssetCalculation
-          },
-          {
             path: '/asset/:assetID/device',
             component: AssetDevice
+          },
+          {
+            path: '/asset/:assetID/detail/:deviceID',
+            component: AssetDeviceDetail
           },
           {
             path: '/asset/:assetID/report',

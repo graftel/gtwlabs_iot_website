@@ -5,7 +5,10 @@ import SideNav from '../_components/sideNav'
 import HeaderNav from '../_components/headerNav'
 import MainArea from './parts/mainArea'
 import AddNewAssets from './parts/addNewAssets'
+
 import { dataActions } from '../_actions/dataAction'
+import { assetActions } from '../_actions/assetAction'
+
 import Loader from '../_components/loader'
 
 class HomePage extends React.Component {
@@ -40,7 +43,7 @@ class HomePage extends React.Component {
 
     if (this.user && !this.assets_local)
     {
-      this.props.dispatch(dataActions.getAssetsOverview(this.user));
+      this.props.dispatch(assetActions.getAssetsOverview(this.user));
     }
   }
 
@@ -97,7 +100,7 @@ class HomePage extends React.Component {
 }
 
 function mapStateToProps(state) {
-  const { data, msg } = state.data
+  const { data, msg } = state.asset
   return {
       assets : data,
       msg: msg

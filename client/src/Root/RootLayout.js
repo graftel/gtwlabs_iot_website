@@ -6,7 +6,10 @@ import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
 import SideNav from '../_components/sideNav'
 import HeaderNav from '../_components/headerNav'
+
 import { dataActions } from '../_actions/dataAction'
+import { assetActions } from '../_actions/assetAction'
+
 import './root.css'
 import Loader from '../_components/loader'
 
@@ -18,7 +21,7 @@ class RootLayout extends Component {
     this.assets_local = JSON.parse(localStorage.getItem('assets'));
     if (this.user && !this.assets_local)
     {
-      this.props.dispatch(dataActions.getAssetsOverview(this.user));
+      this.props.dispatch(assetActions.getAssetsOverview(this.user));
     }
   }
 
@@ -63,7 +66,7 @@ class RootLayout extends Component {
     }
   }
   function mapStateToProps(state) {
-    const { data, msg } = state.data
+    const { data, msg } = state.asset
     return {
         assets : data,
         msg: msg

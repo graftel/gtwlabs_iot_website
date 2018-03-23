@@ -7,7 +7,7 @@ import Loader from '../_components/loader'
 import SideNav from '../_components/sideNav'
 import HeaderNav from '../_components/headerNav'
 
-class AssetCalculation extends React.Component {
+class AssetDeviceDetail extends React.Component {
   constructor(props) {
     super(props);
     console.log("test");
@@ -31,9 +31,12 @@ class AssetCalculation extends React.Component {
     }
     else{
       return (
-        <div>
-           <p>Calculation</p>
-         </div>
+        <div className="mt-3">
+          <h5><a href={"/asset/" + AssetID + "/device/"}>All Devices</a>/Device1</h5>
+          <br />
+          <h3>Device Detail</h3>
+        </div>
+
       );
     }
 
@@ -48,5 +51,5 @@ function mapStateToProps(state) {
   };
 }
 
-const connectedPage = connect(mapStateToProps)(AssetCalculation);
-export { connectedPage as AssetCalculation };
+const connectedPage = connect(mapStateToProps)(AssetDeviceDetail);
+export { connectedPage as AssetDeviceDetail };
