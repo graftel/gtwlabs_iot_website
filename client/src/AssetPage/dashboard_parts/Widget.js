@@ -25,7 +25,12 @@ class Widget extends React.Component {
             </div>
             {this.props.resizestatus === 0 &&
             <div className="row" >
-                <Line index={this.props.index} pTotalWidth={this.props.totalwidth} pWidth={this.props.style.width} pHeight={parseFloat(this.props.style.height)} />
+                <Line 
+                    index={this.props.index} 
+                    pTotalWidth={this.props.totalwidth} 
+                    pWidth={this.props.style.width} 
+                    pHeight={parseFloat(this.props.style.height)} 
+                />
             </div>    
             }
 

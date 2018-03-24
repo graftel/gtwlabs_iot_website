@@ -9,6 +9,7 @@ import HeaderNav from '../_components/headerNav';
 import ReactGridLayout from 'react-grid-layout';
 import Widget from './dashboard_parts/Widget'
 import update from 'immutability-helper';
+import { AddNewWidgetModal } from './dashboard_parts/AddNewWidgetModal';
 
 class AssetDashboard extends React.Component {
   constructor(props) {
@@ -18,6 +19,7 @@ class AssetDashboard extends React.Component {
         AssetID : props.match.params.assetID,
         totalwidth: 1500,
         lock: false,
+        addNewWidgetModalOpen: false,
         dashboarddata: {
           dashboardID: "12345",
           widgets: [
@@ -65,6 +67,8 @@ class AssetDashboard extends React.Component {
     this.onDragStartHanlde = this.onDragStartHanlde.bind(this);
     this.onResizeStart = this.onResizeStart.bind(this);
     this.onLock = this.onLock.bind(this);
+    this.AddNewWidgetModalOpen = this.AddNewWidgetModalOpen.bind(this);
+    this.AddNewWidgetModalClose = this.AddNewWidgetModalClose.bind(this);
 
   }
 
@@ -109,7 +113,17 @@ class AssetDashboard extends React.Component {
   }
 
   onLock() {
+    this.setState({lockStatus: 1});
     this.setState({lock: !this.state.lock});
+  }
+
+
+  AddNewWidgetModalOpen() {
+    this.setState({addNewWidgetModalOpen: true});
+  }
+
+  AddNewWidgetModalClose() {
+    this.setState({addNewWidgetModalOpen: false});
   }
 
   render() {
@@ -125,7 +139,7 @@ class AssetDashboard extends React.Component {
       return (
         <div>
         {dashboarddata ?
-          <div className="container">
+          <div className="container-fluid">
             <div className="row m-auto">
               <div className="float-left m-1"> 
                 <a onClick={this.onLock}>
@@ -133,7 +147,11 @@ class AssetDashboard extends React.Component {
                     <span className={ lock ? '' : 'd-none' }>{ lockIcon }</span>
                 </a>
               </div>
-              <div className="float-left m-1"> <i className="dashboard-toolbar-icon fas fa-plus-square"></i></div>
+              <div className="float-left m-1">
+                <a onClick={this.AddNewWidgetModalOpen}>
+                    <i className="dashboard-toolbar-icon fas fa-plus-square"></i>
+                </a>
+              </div>
               <div className="float-left m-1"> <i className="dashboard-toolbar-icon fas fa-trash-alt"></i></div>
             </div>
             <div className="row">
@@ -146,6 +164,10 @@ class AssetDashboard extends React.Component {
           </div>
           :
           <Loader />}
+          <AddNewWidgetModal  
+              isOpen={this.state.addNewWidgetModalOpen}
+              onClose={this.AddNewWidgetModalClose}
+          />
       </div>
       );
     }

@@ -27,18 +27,14 @@ class Line extends React.Component {
                     t: 20,
                     pad: 0
                     }
-                },
-            loaded: false,
+                }
             }
       }
 
     plot() {
-        console.log('plot' + this.props.index.toString());
         Plotly.newPlot('plot' + this.props.index.toString(), this.state.data, this.state.layout, {displayModeBar: false});
-        //console.log('plot' + this.props.index.toString());
     }
     componentDidMount () {
-        this.setState({loaded: true});
         this.plot();
     }
 
@@ -46,8 +42,9 @@ class Line extends React.Component {
 
   render() {
     return (
-        <div>
-            <div className="col NonDraggableAreaPlot" id={"plot" + this.props.index.toString()} ></div>
+        <div 
+            className="col NonDraggableAreaPlot" 
+            id={"plot" + this.props.index.toString()} >
         </div>
     );
   }

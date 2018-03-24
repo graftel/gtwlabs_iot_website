@@ -7,7 +7,7 @@ const getAssetsOverview = (user) => {
                    'x-api-key' : user.ApiKey}
     };
 
-    return fetch(gConstants.API_ROOT + '/asset/getAsset?userID=' + user.UserID, requestOptions)
+    return fetch(gConstants.API_ROOT + '/asset/getAssetByUser?userID=' + user.UserID, requestOptions)
         .then(response => {
             return Promise.all([response, response.json()])
         })

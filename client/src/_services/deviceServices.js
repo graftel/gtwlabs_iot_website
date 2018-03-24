@@ -9,7 +9,7 @@ const getAllDevices = (user, assetid) => {
                    'x-api-key' : user.ApiKey}
     };
 
-    return fetch(gConstants.API_ROOT + '/device/getDevice?AssetID=' + assetid, requestOptions)
+    return fetch(gConstants.API_ROOT + '/device/getDeviceByAsset?AssetID=' + assetid, requestOptions)
         .then(response => {
             return Promise.all([response, response.json()])
         })
